@@ -1,0 +1,13 @@
+{
+  "train_samples": 61388,
+  "val_samples": 14165,
+  "test_samples": 18887,
+  "vocab_size": 25000,
+  "max_seq_length": 250,
+  "embedding_dim": 100,
+  "train_class_distribution": {
+    "0": 0.6113083990356422,
+    "1": 0.38869160096435784
+  },
+  "elapsed_seconds": 53.65
+}

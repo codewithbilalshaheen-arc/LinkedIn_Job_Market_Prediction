@@ -1,0 +1,13 @@
+Metric,Value,Notes
+Accuracy,0.8246412876581776,Overall correctness
+Precision (Class 1),0.7932741301499491,Precision for Entry level (Low Priority proxy)
+Recall (Class 1),0.7422694455796213,Recall for Entry level (Low Priority proxy)
+F1-Score (Class 1),0.7669247009148487,Harmonic mean of precision & recall
+ROC-AUC,0.8932903449544689,Area under ROC curve
+PR-AUC,0.8495665475375632,Area under Precision-Recall curve
+True Positives (TP),5449.0,Correctly classified Entry level
+False Positives (FP),1420.0,Higher level misclassified as Entry
+True Negatives (TN),10126.0,Correctly classified Non-entry
+False Negatives (FN),1892.0,Entry level misclassified as Higher level
+Total Test Observations,18887.0,Untouched test partition size
+Confusion Matrix Sum,18887.0,TP + FP + TN + FN

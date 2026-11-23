@@ -1,0 +1,123 @@
+================================================================================
+PROPOSED RESEARCH EXTENSION:
+TEMPORAL JOB MARKET DEMAND & EMERGING SKILLS DYNAMICS FOR SOFTWARE STARTUPS (2023–2024)
+================================================================================
+
+1. EXECUTIVE SUMMARY & CONTEXT OF THE ORIGINAL PAPER
+--------------------------------------------------------------------------------
+The foundational paper ("A Deep Learning Framework for Predictive Feature Prioritization
+in Early-Stage Software Startups: Integrating Historical Delivery Data and Market Signals",
+MDPI Computers 2026, 15, 380) proposes a dual-branch deep learning architecture
+designed to optimize feature prioritization for nascent software companies:
+  a) Historical Feature Encoder: A two-layer Bidirectional Long Short-Term Memory
+     (BiLSTM) network with hidden size 128, dropout, and an attention mechanism
+     trained on internal sprint delivery metrics (story points, cycle times, velocity,
+     historical defect rates) across three private early-stage software startups.
+  b) Market Signal Encoder: A one-dimensional Convolutional Neural Network (1D-CNN)
+     leveraging pre-trained word embeddings and parallel kernels of sizes 3, 4, and 5
+     (100 filters each, 300 total pooled units) followed by global max-pooling to
+     extract external market signals from public software job postings.
+  c) Multimodal Fusion & Decision Head: Concatenation of the sprint delivery representation
+     and market signal representation into a 128-unit ReLU dense layer, outputting a
+     binary prioritization probability via sigmoid activation trained with Binary
+     Cross-Entropy (BCE) loss.
+
+2. RESEARCH MOTIVATION & IDENTIFIED LIMITATIONS OF THE ORIGINAL STUDY
+--------------------------------------------------------------------------------
+While the dual-branch framework provides a compelling conceptual bridge between internal
+engineering capacity and external commercial viability, critical methodological and
+practical limitations remain:
+  a) Static Market Representation: The original paper treats job market postings as a
+     static, time-invariant corpus. In reality, modern technology sectors experience
+     rapid, volatile shifts in skill demand, architectural patterns, and framework
+     obsolescence (e.g., generative AI tooling, cloud infrastructure evolutions).
+  b) Closed-Source Historical Data Bottleneck: The historical sprint records were
+     derived from three private, anonymized software startups. Because this dataset
+     is proprietary and unreleased, the full dual-branch architecture cannot be
+     independently audited, benchmarked, or reproduced by the broader scientific community.
+  c) Published Reporting Inconsistency: The published paper reports an untouched test
+     set of N = 24,823 observations, yet the reported confusion matrix sums to
+     exactly 9,930 observations (TN=4,821, FP=1,012, FN=734, TP=3,363). This 2.5x
+     discrepancy underscores the necessity of open, verifiable evaluation protocols.
+  d) Neglect of Skill-Level Trajectories: The original 1D-CNN encodes global semantic
+     n-grams but does not explicitly quantify the temporal acceleration, velocity,
+     or saturation of individual core competencies over time.
+
+3. PROPOSED EXTENSION: TEMPORAL JOB MARKET DEMAND & EMERGING SKILLS ANALYSIS
+--------------------------------------------------------------------------------
+To overcome these limitations without fabricating unverified private sprint records,
+we introduce a rigorous, open-science research extension:
+"Temporal Job Market Demand and Emerging Skills Dynamics (2023–2024)."
+
+This extension augments the static market signal encoder by modeling the longitudinal
+evolution of technical skill demand and experience requirements across temporal windows:
+  - Temporal Posting Velocity: Quantifying day-by-day and week-by-week job posting
+    volumes and identifying seasonal, macroeconomic, or platform hiring surges.
+  - Emerging vs. Saturated Skill Identification: Computing relative demand velocity:
+      Growth_Rate(s) = [Count_t2(s) - Count_t1(s)] / Count_t1(s) * 100%
+    where t1 and t2 represent partitioned longitudinal observation windows.
+  - Experience Level Trajectories: Tracking the ratio of entry-level (low market
+    priority proxy) versus senior/lead roles (high market priority proxy) over time
+    to measure startup hiring conservatism versus expansionary talent acquisition.
+  - Domain and Compensation Dynamic Mapping: Correlating emerging technical skills
+    with annualized salary distributions and remote-work flexibilities.
+
+4. DATASET COLUMNS SUPPORTING THE PROPOSED EXTENSION
+--------------------------------------------------------------------------------
+From the Kaggle LinkedIn Job Postings (2023–2024) corpus (`postings.csv`, N=123,849):
+  1. `listed_time` / `original_listed_time`: Epoch timestamps (millisecond precision)
+     converted into ISO-8601 temporal coordinates (Year-Month-Day, UTC).
+  2. `title`: Job position titles used to filter engineering/startup roles and extract
+     domain specializations.
+  3. `description`: High-dimensional raw text parsed with regular expressions and NLP
+     entity extractors for 30+ technical skills (Python, PyTorch, Docker, Kubernetes,
+     AWS, React, GenAI, LLM, SQL, CI/CD, Rust, Go, TypeScript, etc.).
+  4. `formatted_experience_level`: Canonical experience tiers (Entry level, Mid-Senior,
+     Associate, Director, Executive, Internship) tracking organizational seniority shifts.
+  5. `formatted_work_type`: Remote, Hybrid, and On-site designations analyzing flexibility
+     trends in emerging engineering demands.
+  6. `normalized_salary` / `min_salary` / `max_salary`: Real-valued compensation
+     benchmarks evaluated against emerging skill premiums.
+
+5. METHODOLOGY & EXPERIMENTAL EVALUATION FRAMEWORK
+--------------------------------------------------------------------------------
+  Step 1: Temporal Validation & Epoch Normalization
+    - Filter job postings with valid, non-corrupted epoch timestamps.
+    - Segment records into standardized temporal windows (e.g., bi-weekly or monthly).
+  Step 2: Lexicon & Skill Taxonomy Extraction
+    - Establish a standardized dictionary of high-relevance technical skills spanning
+      AI/ML, Cloud/DevOps, Backend, Frontend, and Data Engineering.
+    - Extract frequency occurrences across tokenized job descriptions per temporal slice.
+  Step 3: Growth Velocity and Acceleration Metrics
+    - Compute baseline frequency, end-period frequency, absolute delta, and percentage
+      growth rate for each technical competency.
+    - Rank skills into 'High Growth / Emerging', 'Stable Core', and 'Declining / Saturated'.
+  Step 4: Cross-Tabulation with Priority Proxies
+    - Correlate emerging skills with the binary market priority target (y = 1 Entry level,
+      y = 0 Experienced/Senior roles).
+    - Determine whether early-stage startups prioritize emerging tools for junior roles
+      or retain them for senior architectural leads.
+
+6. EXPECTED RESEARCH CONTRIBUTIONS
+--------------------------------------------------------------------------------
+  1. Methodological Transparency: Demonstrates how public market corpora can be rigorously
+     mined for dynamic product and talent planning without relying on opaque private records.
+  2. Empirical Skill Trajectories: Delivers reproducible quantitative evidence on emerging
+     technical stacks (e.g., Generative AI, Kubernetes, TypeScript) within the 2023–2024
+     hiring landscape.
+  3. Feature Prioritization Heuristic: Provides startup founders with an evidence-based
+     market radar: features requiring rapidly emerging competencies carry higher market
+     interest but may encounter steeper talent acquisition hurdles.
+
+7. LIMITATIONS AND ASSUMPTIONS
+--------------------------------------------------------------------------------
+  a) Platform Specificity: Data is sourced exclusively from LinkedIn; postings may over-
+     represent larger tech enterprises and venture-backed startups compared to bootstrapped
+     early-stage entities.
+  b) Proxy Characterization: Experience level (`formatted_experience_level`) is an external
+     commercial proxy for feature complexity and organizational priority, rather than a
+     direct measurement of an internal JIRA sprint backlog item.
+  c) Observation Window: The specific Kaggle snapshot spans dense clusters between March
+     and April 2024; findings reflect active springtime hiring campaigns and should be
+     interpreted within this operational window.
+================================================================================

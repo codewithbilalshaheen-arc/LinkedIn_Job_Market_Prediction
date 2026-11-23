@@ -221,3 +221,23 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project Specific Data & Large Files
+Dataset/*.csv
+Dataset/*.zip
+Dataset/*.gz
+!Dataset/README.md
+
+# Large Model Checkpoints & Preprocessed Cache
+Results/models/*.pt
+Results/models/*.pth
+Results/models/*.bin
+Results/models/*.pkl
+Results/models/*.h5
+data/cache/
+*.pkl
+*.npy
+
+# Research Paper PDF (licensing & repo size protection)
+Research_Paper/*.pdf
+

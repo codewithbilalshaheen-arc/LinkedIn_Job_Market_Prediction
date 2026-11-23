@@ -1,0 +1,16 @@
+{
+  "accuracy": 0.8246412876581776,
+  "precision": 0.7932741301499491,
+  "recall": 0.7422694455796213,
+  "f1_score": 0.7669247009148487,
+  "roc_auc": 0.8932903449544689,
+  "pr_auc": 0.8495665475375632,
+  "threshold": 0.5,
+  "test_samples": 18887,
+  "true_negatives": 10126,
+  "false_positives": 1420,
+  "false_negatives": 1892,
+  "true_positives": 5449,
+  "confusion_matrix_sum": 18887,
+  "classification_report": "                                 precision    recall  f1-score   support\n\n       High Market Priority (0)     0.8426    0.8770    0.8594     11546\nLow Market Priority / Entry (1)     0.7933    0.7423    0.7669      7341\n\n                       accuracy                         0.8246     18887\n                      macro avg     0.8179    0.8096    0.8132     18887\n                   weighted avg     0.8234    0.8246    0.8235     18887\n"
+}
